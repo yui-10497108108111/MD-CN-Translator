@@ -66,6 +66,7 @@ yui
 ### 版权说明
 
 该项目签署了GPL3.0 授权许可，详情请参阅 [LICENSE.txt](https://github.com/yui-10497108108111/MD-CN-Translator/blob/main/LICENSE)
+特别说明：引用的部分（包括但不限于代码，图片，数据库），版权归原作者所有。
 
 ### 鸣谢
 
