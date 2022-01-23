@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MDT"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="400" ResizeMode="NoResize" Background="#FF1E1E1E">
+        Title="MainWindow" Height="800" Width="400" ResizeMode="NoResize" Background="#FF1E1E1E" WindowStyle="None" AllowsTransparency="True">
     <Grid>
         <!--Grid.RowDefinitions:将Grid分行-->
         <Grid.RowDefinitions>
@@ -21,14 +21,35 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="card_name" Grid.Row="2" FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="20">青眼白龙</TextBlock>
-        <TextBlock x:Name="types" Grid.Row="4" FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="20">[怪兽|通常] 龙/光\n[★8] 3000/2500</TextBlock>
+        <TextBlock   x:Name="card_name" Grid.Row="2" FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="20">卡片名字</TextBlock>
+        <TextBlock   x:Name="types" Grid.Row="4" FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="20">卡片类型</TextBlock>
         <StackPanel Grid.Row="6" Margin="0,0,0,0"  >
-            <TextBlock x:Name="desc" Width="auto" Height="auto" TextWrapping="Wrap"  FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="20">这个卡名的效果1回合只能使用1次。\r\n①：包含以下其中任意种效果的魔法·陷阱·怪兽的效果发动时，把这张卡从手卡丢弃才能发动。那个效果无效。\r\n●从卡组把卡加入手卡的效果\r\n●从卡组把怪兽特殊召唤的效果\r\n●从卡组把卡送去墓地的效果</TextBlock>
+            <TextBlock   x:Name="desc" Width="auto" Height="auto" TextWrapping="Wrap"  FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="20">卡片说明</TextBlock>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-        <Button x:Name="b_btn" Width="50"  Grid.Row="0" FontSize="14" FontFamily="Microsoft YaHei UI">组卡</Button>
-            <Button x:Name="topmost_btn" Width="70" HorizontalAlignment="Right" Grid.Row="0" FontSize="14" FontFamily="Microsoft YaHei UI">取消置顶</Button>
+            <Button x:Name="b_btn" Width="50"  Grid.Row="0" FontSize="14" FontFamily="Microsoft YaHei UI" Foreground="Gainsboro">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="{x:Null}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF797979"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                组卡
+            </Button>
+            <!--<Button x:Name="topmost_btn" Width="70" HorizontalAlignment="Right" Grid.Row="0" FontSize="14" FontFamily="Microsoft YaHei UI">取消置顶</Button>-->
         </StackPanel>
 
     </Grid>

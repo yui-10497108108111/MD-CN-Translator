@@ -85,7 +85,6 @@ yui
 [issues-url]: https://img.shields.io/github/issues/yui-10497108108111/MD-CN-Translator.svg
 [license-shield]: https://img.shields.io/github/license/yui-10497108108111/MD-CN-Translator.svg?style=flat-square
 [license-url]: https://github.com/yui-10497108108111/MD-CN-Translator/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 
 
 
