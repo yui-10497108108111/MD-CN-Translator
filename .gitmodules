@@ -1,0 +1,6 @@
+[submodule "JokinsRewrite"]
+	path = JokinsRewrite
+	url = https://github.com/JokinAce/JokinsRewrite
+[submodule "ygopro-database"]
+	path = ygopro-database
+	url = https://github.com/mycard/ygopro-database
