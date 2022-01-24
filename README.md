@@ -1,7 +1,7 @@
 # MD-CN-Translator
 
-实时翻译Master Duel 选中卡片文本。两种模式，内存和图像识别。[下载](https://github.com/yui-10497108108111/MD-CN-Translator/releases/tag/0.0.4)     
-OCR模式的构建和使用都比较困难，[查看文档](MDT-OCR/README.md)
+实时翻译Master Duel 选中卡片文本。两种方式内存和图像识别。[下载](https://github.com/yui-10497108108111/MD-CN-Translator/releases/tag/0.0.4)     
+图像识别方式的构建和使用有点难度，[查看文档](MDT-OCR/README.md)
 
 <!-- PROJECT SHIELDS -->
 
