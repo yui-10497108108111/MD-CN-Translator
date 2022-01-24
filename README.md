@@ -41,7 +41,7 @@ Update-Package -reinstall
 5. 生成 x64 Project
 6. 复制 Database/cards.json 到生成的二进制文件目录。
 #### 使用说明
-* 默认窗口可以点击，拖动。按住左ALT之后才可以点击，拖动。
+* 默认窗口不可点击、拖动。按住左ALT之后才可以点击，拖动。
 
 
 
