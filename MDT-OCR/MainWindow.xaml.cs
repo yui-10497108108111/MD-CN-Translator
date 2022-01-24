@@ -1,13 +1,23 @@
-﻿using SharpDX.DirectInput;
+﻿using MDT_OCR.ViewModels;
+using SharpDX.DirectInput;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
-
-namespace MDT
+namespace MDT_OCR
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -59,6 +69,21 @@ namespace MDT
                                 NativeMethodEx.SetMousePass(new WindowInteropHelper(this).Handle);
                             }));
                         }
+                        if (state.IsPressed && state.Key == SharpDX.DirectInput.Key.Space)
+                        {
+                            this.Dispatcher.BeginInvoke(new Action(() =>
+                            {
+                                (this.DataContext as MainWindowViewModel).UpdateCardinfo();
+
+                            }));
+                        }
+                        if (state.IsPressed && state.Key == SharpDX.DirectInput.Key.F1)
+                        {
+                            this.Dispatcher.BeginInvoke(new Action(() =>
+                            {
+                                (this.DataContext as MainWindowViewModel).SwitchAutoDetec();
+                            }));
+                        }
                     }
                     Thread.Sleep(16);
                 }
@@ -68,16 +93,15 @@ namespace MDT
                 if (e.LeftButton == MouseButtonState.Pressed)
                 {
                     this.Background.Opacity = 0.9;
-                    this.DragMove();
+                    this.DragMove(); 
                 }
                 if (e.LeftButton == MouseButtonState.Released)
                 {
                     this.Background.Opacity = 0.75;
-                }
+                } 
             };
 
             #endregion
         }
-
     }
 }

@@ -3,18 +3,19 @@ using MDT.Core.Manager;
 using MDT.Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.ComponentModel;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows.Interop;
 
-namespace MDT.ViewModels
+namespace MDT_OCR.ViewModels
 {
     public class MainWindowViewModel : NotifyPropertyChanged
-    {
+{
+        private string oldCardName = string.Empty;
 
         public MainWindowViewModel()
         {
@@ -23,53 +24,33 @@ namespace MDT.ViewModels
             cardType = info.types;
             cardDesc = info.desc;
             BattleBtnContent = "组卡";
-
-            Task.Run(() =>
-            {
-                TipText = "按住左Alt可以拖动窗口和点击按钮";
-                Thread.Sleep(30000);
-                TipText = string.Empty;
-            });
-
+            autoDetecText = "自动检测已关闭";
+            NativeMethodEx.FindWindow(null, "masterduel");
+            TipText = "空格=检测选中卡片，按住左ALT=拖动窗口，F1=切换自动检测";
+            //Task.Run(() =>
+            //{
+            //    Thread.Sleep(30000);
+            //    TipText = string.Empty;
+            //});
             #region update cardinfo
             Task.Run(() =>
             {
-                Rewrite rewrite = new Rewrite("masterduel");
-                int previousCardid = 0;
                 while (true)
                 {
-                    try
+                    while (autoDetec)
                     {
-                        long cardIdAddr = 0;
-                        if (InBattle)
+                        try
                         {
-                            cardIdAddr = rewrite.MultiPointer64(rewrite.GetDLL("GameAssembly.dll"), 0x01CB2B90, new int[] { 0xB8, 0, 0x44 });
-                        }
-                        else
-                        {
-                            cardIdAddr = rewrite.MultiPointer64(rewrite.GetDLL("GameAssembly.dll"), 0x01CCD278, new int[] { 0xB8, 0, 0xF8, 0x1D8, 0x20 });
-                        }
-                        int cardId = (int)rewrite.ReadInt64(cardIdAddr);
-                        if (cardId != previousCardid)
-                        {
-                            if (cardId != 0)
-                            {
-                                CardInfo cardinfo = CardMgr.Instance.GetCardInfo(cardId.ToString());
-                                if (cardinfo != null)
-                                {
-                                    CardName = cardinfo.cn_name;
-                                    CardType = cardinfo.types;
-                                    CardDesc = cardinfo.desc;
-                                }
-                            }
-                        }
-                        previousCardid = cardId;
-                        Thread.Sleep(20);
-                    }
-                    catch (Exception ex)
-                    {
+                            UpdateCardinfo();
+                            Thread.Sleep(500);
 
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
                     }
+                    Thread.Sleep(50);
                 }
             });
             #endregion
@@ -92,6 +73,20 @@ namespace MDT.ViewModels
         private string cardDesc;
         private string battleBtnContent;
         private string tipText;
+        private string autoDetecText;
+
+        public string AutoDetecText
+        {
+            get
+            {
+                return autoDetecText;
+            }
+            set
+            {
+                autoDetecText = value;
+                RaisePropertyChanged(nameof(autoDetecText));
+            }
+        }
 
         public string TipText
         {
@@ -106,7 +101,37 @@ namespace MDT.ViewModels
             }
         }
 
+        public void UpdateCardinfo()
+        {
+            string cardName = CardImageHandler.GetCardName(InBattle);
+            if (cardName != oldCardName && cardName != string.Empty)
+            {
+                CardInfo cardinfo = CardMgr.Instance.GetCardInfoByEnName(cardName);
+                if (cardinfo != null)
+                {
+                    if (cardinfo != null)
+                    {
+                        CardName = cardinfo.cn_name;
+                        CardType = cardinfo.types;
+                        CardDesc = cardinfo.desc;
+                    }
+                }
+            }
+            oldCardName = cardName;
+        }
 
+        public void SwitchAutoDetec()
+        {
+            autoDetec = !autoDetec;
+            if (autoDetec)
+            {
+                AutoDetecText = "自动检测已开启";
+            }
+            else
+            {
+                AutoDetecText = "自动检测已关闭";
+            }
+        }
         public string BattleBtnContent
         {
             get
@@ -159,5 +184,6 @@ namespace MDT.ViewModels
         }
 
         private bool InBattle;
+        private bool autoDetec;
     }
 }

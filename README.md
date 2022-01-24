@@ -1,6 +1,7 @@
 # MD-CN-Translator
 
-实时翻译Master Duel 选中卡片文本
+实时翻译Master Duel 选中卡片文本。两种模式，内存和OCR。内存使用MDT，OCR使用MDT-OCR。
+OCR模式的构建和使用都比较困难，[查看文档](MDT-OCR/README.md)
 
 <!-- PROJECT SHIELDS -->
 
@@ -28,12 +29,17 @@
 #### **安装步骤**
 
 1. 克隆仓库
-2. 打开 MDT.sln
-3. 生成 x64 Project
-4. 复制 Database/cards.json 到生成的二进制文件目录。
 ```sh
-git clone https://github.com/yui-10497108108111/MD-CN-Translator
+git clone --recursive https://github.com/yui-10497108108111/MD-CN-Translator
 ```
+2. 打开 MDT.sln
+3. 使用包管理控制台
+```sh
+Update-Package -reinstall 
+```
+4. 更改Rewrite的目标框架为.Net Framework 4.7.2
+5. 生成 x64 Project
+6. 复制 Database/cards.json 到生成的二进制文件目录。
 #### 使用说明
 * 默认窗口可以点击，拖动。按住左ALT之后才可以点击，拖动。
 
@@ -73,6 +79,8 @@ yui
 
 
 - [JokinsRewrite](https://github.com/JokinAce/JokinsRewrite)
+- [EasyOCR](https://github.com/JaidedAI/EasyOCR)
+- [ygopro-database](https://github.com/mycard/ygopro-database)
 
 <!-- links -->
 [your-project-path]:yui-10497108108111/MD-CN-Translator
