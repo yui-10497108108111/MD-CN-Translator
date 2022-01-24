@@ -1,15 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using MDT.Models;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.IO;
 
-namespace MDT.Manager
+namespace MDT.Core.Manager
 {
-    internal class CardMgr:BaseManager<CardMgr>
+    public class CardMgr:BaseManager<CardMgr>
     {
         private Dictionary<string, CardInfo> _database;
         public CardMgr()
         {
             string cardStr = File.ReadAllText("cards.json");
-            _database = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, CardInfo>>(cardStr);
+            _database = JsonConvert.DeserializeObject<Dictionary<string, CardInfo>>(cardStr);
         }
         public CardInfo GetCardInfo(string id)
         {

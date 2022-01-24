@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MDT
+namespace MDT.Models
 {
     public class text
     {
@@ -12,7 +12,7 @@ namespace MDT
         public string pdesc { get; set; }
         public string desc { get; set; }
     }
-    internal class CardInfo
+    public class CardInfo
     {
         public int cid { get; set; }
         public int id { get; set; }

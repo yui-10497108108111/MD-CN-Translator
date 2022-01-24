@@ -4,53 +4,41 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MDT"
+        xmlns:model="clr-namespace:MDT.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="400" ResizeMode="NoResize" Background="#FF1E1E1E" WindowStyle="None" AllowsTransparency="True">
+    <Window.DataContext>
+        <model:MainWindowViewModel></model:MainWindowViewModel>
+    </Window.DataContext>
     <Grid>
-        <!--Grid.RowDefinitions:将Grid分行-->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25px"/>
-            <RowDefinition Height="10px"/>
-            <RowDefinition Height="25px"/>
-            <RowDefinition Height="10px"/>
-            <RowDefinition Height="25px"/>
-            <RowDefinition Height="10px"/>
-            <RowDefinition Height="25*"/>
-        </Grid.RowDefinitions>
-        <!--Grid.ColumnDefinitions:将Grid分列-->
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <TextBlock   x:Name="card_name" Grid.Row="2" FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="20">卡片名字</TextBlock>
-        <TextBlock   x:Name="types" Grid.Row="4" FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="20">卡片类型</TextBlock>
-        <StackPanel Grid.Row="6" Margin="0,0,0,0"  >
-            <TextBlock   x:Name="desc" Width="auto" Height="auto" TextWrapping="Wrap"  FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="20">卡片说明</TextBlock>
+        <StackPanel>
+            <DockPanel >
+           <TextBlock Margin="0 0 0 5" Text="{Binding CardName}" FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="20"></TextBlock>
+        <Button Command="{Binding SwitchCommand}" Content="{Binding BattleBtnContent}" x:Name="b_btn" HorizontalAlignment="Right" Width="50" FontSize="14" FontFamily="Microsoft YaHei UI" Foreground="Gainsboro">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="{x:Null}"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF797979"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            
+        </Button>
+        </DockPanel>
+            <TextBlock Margin="0 0 0 5" Text="{Binding CardType}" FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="20"></TextBlock>
+            <TextBlock Margin="0 0 0 5" Text="{Binding CardDesc}" Width="auto" Height="auto" TextWrapping="Wrap"  FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="20"></TextBlock>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="b_btn" Width="50"  Grid.Row="0" FontSize="14" FontFamily="Microsoft YaHei UI" Foreground="Gainsboro">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="{x:Null}"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#FF797979"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-                组卡
-            </Button>
-            <!--<Button x:Name="topmost_btn" Width="70" HorizontalAlignment="Right" Grid.Row="0" FontSize="14" FontFamily="Microsoft YaHei UI">取消置顶</Button>-->
-        </StackPanel>
-
     </Grid>
 </Window>

@@ -1,8 +1,8 @@
 ﻿using System.IO;
 
-namespace MDT
+namespace MDT.Core
 {
-    internal class Guard
+    public class Guard
     {
         public Guard()
         {

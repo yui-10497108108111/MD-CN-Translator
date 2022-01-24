@@ -28,12 +28,14 @@
 #### **安装步骤**
 
 1. 克隆仓库
-2. 打开 MDT/MDT.sln
+2. 打开 MDT.sln
 3. 生成 x64 Project
 4. 复制 Database/cards.json 到生成的二进制文件目录。
 ```sh
 git clone https://github.com/yui-10497108108111/MD-CN-Translator
 ```
+#### 使用说明
+* 默认窗口可以点击，拖动。按住左ALT之后才可以点击，拖动。
 
 
 

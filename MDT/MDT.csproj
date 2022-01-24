@@ -85,6 +85,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,19 +94,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BaseManager.cs" />
-    <Compile Include="CardInfo.cs" />
-    <Compile Include="Guard.cs" />
-    <Compile Include="Jokin.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Manager\CardMgr.cs" />
-    <Compile Include="Memory.cs" />
-    <Compile Include="NativeMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -131,6 +125,28 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JokinsRewrite\Rewrite\Rewrite.csproj">
+      <Project>{ec7ee001-ad86-4d29-9cca-778517754544}</Project>
+      <Name>Rewrite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDT.Base\MDT.Base.csproj">
+      <Project>{14996436-c7dd-49a7-ac11-a32df677d43f}</Project>
+      <Name>MDT.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDT.Common\MDT.Common.csproj">
+      <Project>{fa13d554-22e1-4677-bb23-39d079c172f5}</Project>
+      <Name>MDT.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDT.Core\MDT.Core.csproj">
+      <Project>{0821df35-de8a-4033-8d46-7592774f54a2}</Project>
+      <Name>MDT.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MDT.Models\MDT.Models.csproj">
+      <Project>{9f980e26-2e4d-4f87-9dde-49196ae11f67}</Project>
+      <Name>MDT.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
