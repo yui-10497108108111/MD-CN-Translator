@@ -22,9 +22,9 @@ cd MDT-OCR-PY
 pip install -r requirements.txt
 ```
 
-1. 运行run.py
+1. 运行ocr_api.py
 ```sh
-python run.py
+python ocr_api.py
 ```
 1. 打开 MDT.sln
 1. 使用包管理控制台
