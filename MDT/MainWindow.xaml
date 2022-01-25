@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MDT"
         xmlns:model="clr-namespace:MDT.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="400" ResizeMode="NoResize" Background="#FF1E1E1E" WindowStyle="None" AllowsTransparency="True">
+        Title="MainWindow" Height="800" Width="400" ResizeMode="CanResizeWithGrip" Background="#FF1E1E1E" WindowStyle="None" AllowsTransparency="True">
     <Window.DataContext>
         <model:MainWindowViewModel></model:MainWindowViewModel>
     </Window.DataContext>

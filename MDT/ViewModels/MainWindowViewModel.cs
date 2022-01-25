@@ -21,13 +21,13 @@ namespace MDT.ViewModels
             CardInfo info = CardMgr.Instance.GetCardInfo("12950");
             cardName = info.cn_name;
             cardType = info.types;
-            cardDesc = info.desc;
+            cardDesc = $"{info.desc }\n{info.pdesc}";
             BattleBtnContent = "组卡";
 
             Task.Run(() =>
             {
-                TipText = "按住左Alt可以拖动窗口和点击按钮";
-                Thread.Sleep(30000);
+                TipText = "按住左Alt可以拖动窗口和切换右上角组卡、决斗、右下缩放";
+                Thread.Sleep(60000);
                 TipText = string.Empty;
             });
 
@@ -59,7 +59,7 @@ namespace MDT.ViewModels
                                 {
                                     CardName = cardinfo.cn_name;
                                     CardType = cardinfo.types;
-                                    CardDesc = cardinfo.desc;
+                                    CardDesc = $"{cardinfo.desc }\n{cardinfo.pdesc}";
                                 }
                             }
                         }

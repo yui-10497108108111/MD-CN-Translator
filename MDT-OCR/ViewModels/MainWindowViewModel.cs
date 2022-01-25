@@ -22,16 +22,16 @@ namespace MDT_OCR.ViewModels
             CardInfo info = CardMgr.Instance.GetCardInfo("12950");
             cardName = info.cn_name;
             cardType = info.types;
-            cardDesc = info.desc;
+            cardDesc = $"{info.desc }\n{info.pdesc}";
             BattleBtnContent = "组卡";
             autoDetecText = "自动检测已关闭";
             NativeMethodEx.FindWindow(null, "masterduel");
-            TipText = "空格=检测选中卡片，按住左ALT=拖动窗口，F1=切换自动检测";
-            //Task.Run(() =>
-            //{
-            //    Thread.Sleep(30000);
-            //    TipText = string.Empty;
-            //});
+            Task.Run(() =>
+            {
+                TipText = "空格=检测选中卡片\n按住左ALT=拖动窗口和切换右上角组卡、决斗，右下角缩放\nF1=切换自动检测\n";
+                Thread.Sleep(60000);
+                TipText = string.Empty;
+            });
             #region update cardinfo
             Task.Run(() =>
             {
@@ -113,7 +113,7 @@ namespace MDT_OCR.ViewModels
                     {
                         CardName = cardinfo.cn_name;
                         CardType = cardinfo.types;
-                        CardDesc = cardinfo.desc;
+                        CardDesc = $"{cardinfo.desc }\n{cardinfo.pdesc}";
                     }
                 }
             }

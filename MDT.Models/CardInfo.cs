@@ -16,5 +16,6 @@ namespace MDT.Models
         public string en_name { get; set; }
         public string types { get; set; }
         public string desc { get; set; }
+        public string pdesc { get; set; }
     }
 }

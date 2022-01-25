@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MDT_OCR"
         xmlns:model="clr-namespace:MDT_OCR.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="400" ResizeMode="NoResize" Background="#FF1E1E1E" WindowStyle="None" AllowsTransparency="True">
+        Title="MainWindow" Height="800" Width="400" ResizeMode="CanResizeWithGrip" Background="#FF1E1E1E" WindowStyle="None" AllowsTransparency="True">
     <Window.DataContext>
         <model:MainWindowViewModel></model:MainWindowViewModel>
     </Window.DataContext>
@@ -40,8 +40,9 @@
             <TextBlock Margin="0 0 0 5" Text="{Binding CardType}" FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="20"></TextBlock>
             <TextBlock Margin="0 0 0 5" Text="{Binding CardDesc}" Width="auto" Height="auto" TextWrapping="Wrap"  FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="20"></TextBlock>
         </StackPanel>
-        <TextBlock Text="{Binding TipText}" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="10"></TextBlock>
-        <TextBlock Text="{Binding AutoDetecText}" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="10"></TextBlock>
+
+        <TextBlock Text="{Binding TipText}" Width="220" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="10"></TextBlock>
+        <TextBlock Text="{Binding AutoDetecText}" Margin="0 0 0 20" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontFamily="Microsoft YaHei UI" Foreground="Gainsboro" FontSize="10"></TextBlock>
 
     </Grid>
 </Window>
