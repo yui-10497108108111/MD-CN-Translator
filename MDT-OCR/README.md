@@ -37,5 +37,5 @@ Update-Package -reinstall
 
 # 注意事项
 1. 自动检测CPU占用极高。
-1. 可以尝试把easyocr切换到GPU版本。
+1. 可以把torch切换到GPU版本。https://pytorch.org
 1. 名字太长的卡可以等滚动一下之后在检测。
