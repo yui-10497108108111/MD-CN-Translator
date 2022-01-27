@@ -80,5 +80,16 @@ public class NativeMethodEx
         DeleteDC(hmemdc);
         return bmp;
     }
+    public static Bitmap CaptureScreen(int x, int y, int width, int height)
+    {
+        Bitmap bmp = new Bitmap(width, height);
+        using (Graphics g = Graphics.FromImage(bmp))
+        {
+            g.CopyFromScreen(new Point(x, y), new Point(0, 0), bmp.Size);
+            g.Dispose();
+        }
+        //bit.Save(@"capture2.png");
+        return bmp;
+    }
 
 }

@@ -16,9 +16,11 @@ namespace MDT_OCR.ViewModels
     public class MainWindowViewModel : NotifyPropertyChanged
 {
         private string oldCardName = string.Empty;
-
+        private MarkWindow markWindow;
         public MainWindowViewModel()
         {
+            markWindow = new MarkWindow();
+            markWindow.Show();
             CardInfo info = CardMgr.Instance.GetCardInfo("12950");
             cardName = info.cn_name;
             cardType = info.types;
@@ -103,7 +105,8 @@ namespace MDT_OCR.ViewModels
 
         public void UpdateCardinfo()
         {
-            string cardName = CardImageHandler.GetCardName(InBattle);
+            var point = markWindow.PointToScreen(new System.Windows.Point(0,0));
+            string cardName = CardImageHandler.GetCardName((int)point.X,(int)point.Y,(int)markWindow.Width,(int)markWindow.Height);
             if (cardName != oldCardName && cardName != string.Empty)
             {
                 CardInfo cardinfo = CardMgr.Instance.GetCardInfoByEnName(cardName);

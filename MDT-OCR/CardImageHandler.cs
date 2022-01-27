@@ -62,18 +62,10 @@ namespace MDT_OCR
             }
         }
 
-        public static string GetCardName(bool InBattle = false)
+        public static string GetCardName(int x,int y,int width,int height)
         {
-            Bitmap bmp = NativeMethodEx.GetWindowCapture(NativeMethodEx.FindWindow(null, "masterduel"));
-            if (InBattle)
-            {
-                bmp = CaptureImage(bmp, 325, 45, 55, 193);
-            }
-            else
-            {
-                bmp = CaptureImage(bmp, 370, 50, 70, 152);
-            }
-            //bmp.Save("1.png");
+            Bitmap bmp = NativeMethodEx.CaptureScreen(x, y, width, height);
+            bmp.Save("1.png");
             string base64String = ToBase64(bmp);
             bmp.Dispose();
             string result = string.Empty;
@@ -82,8 +74,6 @@ namespace MDT_OCR
 
             try
             {
-
-
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(OcrApiUrl);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
