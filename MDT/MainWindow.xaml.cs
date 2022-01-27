@@ -1,6 +1,6 @@
-﻿using SharpDX.DirectInput;
+﻿using MDT.Core;
+using SharpDX.DirectInput;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -26,43 +26,7 @@ namespace MDT
             {
                 NativeMethodEx.SetMousePass(new WindowInteropHelper(this).Handle);
             };
-            Task.Run(() =>
-            {
-                // Initialize DirectInput
-                DirectInput directInput = new DirectInput();
-
-                // Instantiate the joystick
-                SharpDX.DirectInput.Keyboard keyboard = new SharpDX.DirectInput.Keyboard(directInput);
-
-                // Acquire the joystick
-                keyboard.Properties.BufferSize = 128;
-                keyboard.Acquire();
-
-                // Poll events from joystick
-                while (true)
-                {
-                    keyboard.Poll();
-                    KeyboardUpdate[] datas = keyboard.GetBufferedData();
-                    foreach (KeyboardUpdate state in datas)
-                    {
-                        if (state.IsPressed && state.Key == SharpDX.DirectInput.Key.LeftAlt)
-                        {
-                            this.Dispatcher.BeginInvoke(new Action(() =>
-                            {
-                                NativeMethodEx.RestoreMousePass(new WindowInteropHelper(this).Handle);
-                            }));
-                        }
-                        else if (state.IsReleased && state.Key == SharpDX.DirectInput.Key.LeftAlt)
-                        {
-                            this.Dispatcher.BeginInvoke(new Action(() =>
-                            {
-                                NativeMethodEx.SetMousePass(new WindowInteropHelper(this).Handle);
-                            }));
-                        }
-                    }
-                    Thread.Sleep(16);
-                }
-            });
+            Guard.Instance.Command += DragWindow_Command;
             this.MouseDown += (s, e) =>
             {
                 if (e.LeftButton == MouseButtonState.Pressed)
@@ -77,6 +41,24 @@ namespace MDT
             };
 
             #endregion
+        }
+
+        private async Task DragWindow_Command(KeyboardUpdate arg)
+        {
+            if (arg.IsPressed && arg.Key == SharpDX.DirectInput.Key.LeftAlt)
+            {
+                await this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    NativeMethodEx.RestoreMousePass(new WindowInteropHelper(this).Handle);
+                }));
+            }
+            else if (arg.IsReleased && arg.Key == SharpDX.DirectInput.Key.LeftAlt)
+            {
+                await this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    NativeMethodEx.SetMousePass(new WindowInteropHelper(this).Handle);
+                }));
+            }
         }
 
     }
