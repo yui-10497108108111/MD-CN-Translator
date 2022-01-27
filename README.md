@@ -1,8 +1,7 @@
-# MD-CN-Translator
-
-实时翻译Master Duel 选中卡片文本。两种方式内存和图像识别。[下载](https://github.com/yui-10497108108111/MD-CN-Translator/releases/tag/0.0.5)     
+# MD-CN-Translator  
+实时翻译Master Duel 选中卡片文本。两种方式内存和图像识别。[下载](https://github.com/yui-10497108108111/MD-CN-Translator/releases/tag/0.0.6)     
 图像识别方式跟内存读取在使用体验上基本一致，参考[GIF](Image/demo.gif)，左边的就是图像识别方式的，GIF速度被慢放了点，实际上没有那么大差距。图像识别在名字过长的卡片上需要等待名字滚动。    
-图像识别方式的构建和使用有点难度，[查看文档](MDT-OCR/README.md)    
+图像识别方式的构建和使用[查看文档](MDT-OCR/README.md)    
 > 补充一下，这个项目从功能上已经很完善了，我知道问题还是有的。之后看情况吧。    
 如果有人用遇到问题请提Issues,我会抽时间修复的。
 
