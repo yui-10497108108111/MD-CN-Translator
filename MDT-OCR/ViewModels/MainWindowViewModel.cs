@@ -2,14 +2,8 @@
 using MDT.Core.Manager;
 using MDT.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace MDT_OCR.ViewModels
 {
@@ -19,13 +13,15 @@ namespace MDT_OCR.ViewModels
         private MarkWindow markWindow;
         public MainWindowViewModel()
         {
-            markWindow = new MarkWindow();
-            markWindow.Show();
+            if (markWindow==null)
+            {
+                markWindow = new MarkWindow();
+                markWindow.Show();
+            }
             CardInfo info = CardMgr.Instance.GetCardInfo("12950");
             cardName = info.cn_name;
             cardType = info.types;
             cardDesc = $"{info.desc }\n{info.pdesc}";
-            BattleBtnContent = "组卡";
             autoDetecText = "自动检测已关闭";
             NativeMethodEx.FindWindow(null, "masterduel");
             Task.Run(() =>
@@ -56,24 +52,10 @@ namespace MDT_OCR.ViewModels
                 }
             });
             #endregion
-            SwitchCommand = new RelayCommand((o) =>
-            {
-                InBattle = !InBattle;
-                if (InBattle)
-                {
-                    BattleBtnContent = "决斗中";
-                }
-                else
-                {
-                    BattleBtnContent = "组卡";
-                }
-            });
         }
-        public ICommand SwitchCommand { get; private set; }
         private string cardName;
         private string cardType;
         private string cardDesc;
-        private string battleBtnContent;
         private string tipText;
         private string autoDetecText;
 
@@ -105,6 +87,10 @@ namespace MDT_OCR.ViewModels
 
         public void UpdateCardinfo()
         {
+            if (markWindow == null)
+            {
+
+            }
             var point = markWindow.PointToScreen(new System.Windows.Point(0,0));
             string cardName = CardImageHandler.GetCardName((int)point.X,(int)point.Y,(int)markWindow.Width,(int)markWindow.Height);
             if (cardName != oldCardName && cardName != string.Empty)
@@ -126,28 +112,8 @@ namespace MDT_OCR.ViewModels
         public void SwitchAutoDetec()
         {
             autoDetec = !autoDetec;
-            if (autoDetec)
-            {
-                AutoDetecText = "自动检测已开启";
-            }
-            else
-            {
-                AutoDetecText = "自动检测已关闭";
-            }
+            AutoDetecText = autoDetec ? "自动检测已开启" : "自动检测已关闭";
         }
-        public string BattleBtnContent
-        {
-            get
-            {
-                return battleBtnContent;
-            }
-            set
-            {
-                battleBtnContent = value;
-                RaisePropertyChanged(nameof(battleBtnContent));
-            }
-        }
-
 
         public string CardName
         {
@@ -186,7 +152,6 @@ namespace MDT_OCR.ViewModels
             }
         }
 
-        private bool InBattle;
         private bool autoDetec;
     }
 }
