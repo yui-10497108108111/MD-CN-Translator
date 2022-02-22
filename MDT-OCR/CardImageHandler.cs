@@ -65,7 +65,7 @@ namespace MDT_OCR
         public static string GetCardName(int x,int y,int width,int height)
         {
             Bitmap bmp = NativeMethodEx.CaptureScreen(x, y, width, height);
-            bmp.Save("1.png");
+            //bmp.Save("1.png");
             string base64String = ToBase64(bmp);
             bmp.Dispose();
             string result = string.Empty;

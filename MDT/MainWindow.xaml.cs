@@ -50,6 +50,7 @@ namespace MDT
                 await this.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     NativeMethodEx.RestoreMousePass(new WindowInteropHelper(this).Handle);
+                    this.ResizeMode = ResizeMode.CanResizeWithGrip;
                 }));
             }
             else if (arg.IsReleased && arg.Key == SharpDX.DirectInput.Key.LeftAlt)
@@ -57,6 +58,7 @@ namespace MDT
                 await this.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     NativeMethodEx.SetMousePass(new WindowInteropHelper(this).Handle);
+                    this.ResizeMode = ResizeMode.NoResize;
                 }));
             }
         }

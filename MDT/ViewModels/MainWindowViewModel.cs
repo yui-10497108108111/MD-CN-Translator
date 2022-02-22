@@ -28,6 +28,10 @@ namespace MDT.ViewModels
             {
                 TipText = "按住左Alt可以拖动窗口和切换右上角组卡、决斗、右下缩放";
                 Thread.Sleep(60000);
+                MainWindow.Instance.Dispatcher.Invoke(() =>
+                {
+                    MainWindow.Instance.ResizeMode = System.Windows.ResizeMode.NoResize;
+                });
                 TipText = string.Empty;
             });
 
@@ -43,11 +47,11 @@ namespace MDT.ViewModels
                         long cardIdAddr = 0;
                         if (InBattle)
                         {
-                            cardIdAddr = rewrite.MultiPointer64(rewrite.GetDLL("GameAssembly.dll"), 0x01CB2B90, new int[] { 0xB8, 0, 0x44 });
+                            cardIdAddr = rewrite.MultiPointer64(rewrite.GetDLL("GameAssembly.dll"), 0x01CB49C8, new int[] { 0x40, 0x58, 0xB8, 0x10,0x44 });
                         }
                         else
                         {
-                            cardIdAddr = rewrite.MultiPointer64(rewrite.GetDLL("GameAssembly.dll"), 0x01CCD278, new int[] { 0xB8, 0, 0xF8, 0x1D8, 0x20 });
+                            cardIdAddr = rewrite.MultiPointer64(rewrite.GetDLL("GameAssembly.dll"), 0x01CCE3C0, new int[] { 0xB8, 0, 0xF8, 0x1D8, 0x20 });
                         }
                         int cardId = (int)rewrite.ReadInt64(cardIdAddr);
                         if (cardId != previousCardid)
@@ -78,7 +82,7 @@ namespace MDT.ViewModels
                 InBattle = !InBattle;
                 if (InBattle)
                 {
-                    BattleBtnContent = "决斗中";
+                    BattleBtnContent = "决斗";
                 }
                 else
                 {
