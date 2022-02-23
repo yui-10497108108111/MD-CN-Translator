@@ -2,14 +2,9 @@
 using MDT.Core.Manager;
 using MDT.Models;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows.Interop;
 
 namespace MDT.ViewModels
 {
@@ -18,6 +13,8 @@ namespace MDT.ViewModels
 
         public MainWindowViewModel()
         {
+            MemPoint duel = ConfigHelper.ReadMemPoint("duel");
+            MemPoint deck = ConfigHelper.ReadMemPoint("deck");
             CardInfo info = CardMgr.Instance.GetCardInfo("12950");
             cardName = info.cn_name;
             cardType = info.types;
@@ -47,11 +44,11 @@ namespace MDT.ViewModels
                         long cardIdAddr = 0;
                         if (InBattle)
                         {
-                            cardIdAddr = rewrite.MultiPointer64(rewrite.GetDLL("GameAssembly.dll"), 0x01CB49C8, new int[] { 0x40, 0x58, 0xB8, 0x10,0x44 });
+                            cardIdAddr = rewrite.MultiPointer64(rewrite.GetDLL(duel.ModuleName), duel.Address, duel.Offset);
                         }
                         else
                         {
-                            cardIdAddr = rewrite.MultiPointer64(rewrite.GetDLL("GameAssembly.dll"), 0x01CCE3C0, new int[] { 0xB8, 0, 0xF8, 0x1D8, 0x20 });
+                            cardIdAddr = rewrite.MultiPointer64(rewrite.GetDLL(deck.ModuleName), deck.Address, deck.Offset);
                         }
                         int cardId = (int)rewrite.ReadInt64(cardIdAddr);
                         if (cardId != previousCardid)

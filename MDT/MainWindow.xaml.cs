@@ -1,6 +1,7 @@
 ﻿using MDT.Core;
 using SharpDX.DirectInput;
 using System;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
